@@ -8,7 +8,7 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
-app.post("/selection_sort", (req, res) => {
+app.post("/api/selection_sort", (req, res) => {
     const arrayString = req.body.array;
     if (!arrayString) {
         return res.status(400).send({ error: "Array string is required" });
