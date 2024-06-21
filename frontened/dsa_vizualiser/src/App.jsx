@@ -1,41 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
-import axios from "axios"
+
+import Navbar from "./navbar"
+import SelectionSort from "./components/sorting/SelectionSort"
+import BubbleSort from './components/sorting/BubbleSort'
+import InsertionSort from './components/sorting/InsertionSort'
+
 
 function App() {
-  const [array, setarray] = useState([])
-  const [sortedsteps, setsortedsteps] = useState([])
-  
-  const selectionSort = async () => {
-    const response = await axios.post("/api/selection_sort", { array: array })
-    console.log(response.data)
-    setsortedsteps(response.data.steps)
-  }
-  
-
   return (
     <>
-      <div className="App">
+      <SelectionSort />
+      <BubbleSort />
+      <InsertionSort/>
+      {/* <Navbar/> */}
+      {/* <div className="App">
         <header className="App-header">
           <input type="text" onChange={(e) => setarray(e.target.value)} />
           <button onClick={selectionSort}>Selection Sort</button>
+          <button onClick={bubbleSort}>Bubble Sort</button>
+          <button onClick={insertionSort}>Insertion Sort</button>
+          <button onClick={mergeSort}>Merge Sort</button>
+          <button onClick={quick_sort}>Quick Sort</button>
+          <button onClick={heapSort}>Heap Sort</button>
+          <button onClick={radixSort}>Radix Sort</button>
+
+
         </header>
       </div>
       <div>
-        {/* visual display of sorting using setsortedsteps using animation and a button to display next array*/}
-        {sortedsteps.map((step, index) => (
-          <div key={index}>
-            {step.map((value, index) => (
-              <div key={index} style={{ display: "inline-block", margin: "5px", padding: "5px", border: "1px solid black" }}>
-                {value}
-              </div>
-            ))}
+        <div>
+          {sortedi-1}
+        </div>
+        
+        {
+          
+          steps.map((value, index)=>(
+            <div key={index} style={{
+              display: "inline-block",
+              width: "fit-content",
+              height:`${value*10}px`,
+              margin: "0 2px",
+              backgroundColor: sortede[index] == value ? 'green' : 'red',
+              borderColor:index==sortedi?"blue":"black",borderWidth:"2px",borderStyle:"solid",
+              color: "white",
+              textAlign: "center",
+              animation:
+                sortedi-1 > index
+                  ? "highlight 1s infinite"
+                  : "none",
+            }}>
+            {value}
           </div>
-        ))}
-      </div>
-     
+          ))
+        }
+      </div> */}
     </>
   )
 }
