@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import App from './App.jsx';
+import App from './components/App.jsx';
 import SelectionSort from './components/sorting/SelectionSort.jsx';
 import BubbleSort from './components/sorting/BubbleSort.jsx';
 import InsertionSort from './components/sorting/InsertionSort.jsx';
