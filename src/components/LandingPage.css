@@ -1,0 +1,39 @@
+.landing-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: calc(100vw - 2em);
+    padding: 1em;
+}
+
+.nav-link-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 30%;
+    flex: 1 1 calc(33% - 1em);
+    margin: 0.5em;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link-box:hover {
+    background-color: skyblue;
+    /* Optional: Add a hover effect */
+}
+
+@media (max-width: 768px) {
+    .nav-link-box {
+        width: 100%;
+        margin: 0.5em 0;
+    }
+}

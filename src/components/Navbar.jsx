@@ -1,26 +1,22 @@
 import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">Sorting Visualizer</Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/selection">Selection Sort</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/bubble">Bubble Sort</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/insertion">Insertion Sort</Link>
-                        </li>
-                    </ul>
-                </div>
+                <Link to="/" className="nav-link">
+                    <h1>Home</h1>
+                </Link>
+                <Link to="/sorting" className="nav-link">
+                    <h1>Sorting</h1>
+                </Link>
+                <Link to="/searching" className="nav-link">
+                    <h1>Searching</h1>
+                </Link>
+                <Link to="/pathfinding" className="nav-link">
+                    <h1>Pathfinding</h1>
+                </Link>
             </div>
         </nav>
     );
