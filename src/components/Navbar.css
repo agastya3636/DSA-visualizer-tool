@@ -37,3 +37,32 @@
     margin: 0;
     /* Remove default margin */
 }
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 5px;
+    }
+
+    .container-fluid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-link {
+        margin: 5px 0;
+    }
+
+    .nav-link h1 {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-link h1 {
+        font-size: 1em;
+    }
+
+    .nav-link {
+        margin: 3px 0;
+    }
+}

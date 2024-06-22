@@ -9,6 +9,7 @@ import './index.css';
 import SortingLandingPage from './components/SortingLandingPage.jsx';
 import LandingPage from './components/LandingPage.jsx';
 import Sorting from './components/Sorting.jsx'
+import GraphLandingPage from './components/graph/GraphLandingPage.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
         <Route path="bubble" element={<BubbleSort />} />
         <Route path="insertion" element={<InsertionSort />} />
       </Route>
+      <Route path='pathfinding' element={<GraphLandingPage/>}/>
     </Route>
   )
 );
