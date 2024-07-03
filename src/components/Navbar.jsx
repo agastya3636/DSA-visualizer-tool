@@ -12,19 +12,25 @@ function Navbar() {
     return (
         <nav className="navbar">
             <div className="container-fluid">
-                <Link to="/" className="nav-link">
-                    <h1>Home</h1>
-                </Link>
-                <Link to="/sorting" className="nav-link">
-                    <h1>Sorting</h1>
-                </Link>
-                <Link to="/searching" className="nav-link">
-                    <h1>Searching</h1>
-                </Link>
-                <Link to="/pathfinding" className="nav-link">
-                    <h1>Pathfinding</h1>
-                </Link>
-                <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+                <div className="nav-links">
+                    <Link to="/" className="nav-link">
+                        Home
+                    </Link>
+                    <Link to="/sorting" className="nav-link">
+                        Sorting
+                    </Link>
+                    <Link to="/searching" className="nav-link">
+                        Searching
+                    </Link>
+                    <Link to="/pathfinding" className="nav-link">
+                        Pathfinding
+                    </Link>
+                </div>
+                <button
+                    className="mobile-menu-toggle"
+                    onClick={toggleMobileMenu}
+                    aria-label="Toggle mobile menu"
+                >
                     &#9776;
                 </button>
             </div>

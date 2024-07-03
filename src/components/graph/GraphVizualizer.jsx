@@ -38,7 +38,10 @@ function GraphVisualizer({ edges }) {
         };
     }, [edges]);
 
-    return <div ref={containerRef} style={{ height: '500px' }} />;
+    return <div ref={containerRef} style={{
+        height: '500px',
+        backgroundColor:'white',
+    }} />;
 }
 
 export default GraphVisualizer;

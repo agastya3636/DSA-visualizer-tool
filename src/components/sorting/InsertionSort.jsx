@@ -1,71 +1,70 @@
 import { useEffect, useState } from "react";
-
+import './a.css'
 function InsertionSort() {
     const [inputString, setInputString] = useState("");
-    const [sortedArray, setSortedArray] = useState([]);
-    const [steps, setSteps] = useState([]);
-    const [currentI, setCurrentI] = useState(null);
-    const [currentJ, setCurrentJ] = useState(null);
+    const [array, setArray] = useState([]);
 
-    const insertionsort = () => {
-        const array = inputString.split(" ").map(Number);
-        setSortedArray(array);
-        setSteps([...array]);
+    const insertionSort = async () => {
+
+        const bars = document.getElementsByClassName('bar');
+        const arrayCopy = [...array];
+        //insertion sort
+        for (let i = 1; i < arrayCopy.length; i++) {
+            let key = arrayCopy[i];
+            let j = i - 1;
+            bars[i].style.backgroundColor = 'red';
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            while (j >= 0 && arrayCopy[j] > key) {
+                bars[j].style.backgroundColor = 'red';
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                arrayCopy[j + 1] = arrayCopy[j];
+                setArray([...arrayCopy]);
+                bars[j].style.backgroundColor = '#3498db';
+                j = j - 1;
+            }
+            arrayCopy[j + 1] = key;
+            setArray([...arrayCopy]);
+            bars[i].style.backgroundColor = '#3498db';
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
     };
 
+    const swap = (array, i, j) => {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                [array[i], array[j]] = [array[j], array[i]];
+                resolve();
+            }, 1000);
+        });
+    };
     useEffect(() => {
-        if (sortedArray.length > 0) {
-            const sortSteps = async () => {
-                for (let i = 1; i < sortedArray.length; i++) {
-                    let key = sortedArray[i];
-                    let j = i - 1;
-                    setCurrentI(i);
-                    while (j >= 0 && sortedArray[j] > key) {
-                        setCurrentJ(j);
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        sortedArray[j + 1] = sortedArray[j];
-                        setSteps([...sortedArray]);
-                        j = j - 1;
-                    }
-                    sortedArray[j + 1] = key;
-                    setSteps([...sortedArray]);
-                    setCurrentI(null);
-                    setCurrentJ(null);
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                }
-                setCurrentI(null);
-                setCurrentJ(null);
-            };
-            sortSteps();
-        }
-    }, [sortedArray]);
+        settheArray();
+    }, []);
+
+    const settheArray = async () => {
+        setArray( inputString.split(" ").map(Number));
+    }
 
     return (
-        <div>
+        <div className="Sortingcontainer">
             <h1>Insertion Sort</h1>
+            <p>Enter the elements of array seperated by space</p>
             <div>
                 <input
+                    className="arrayinput"
                     type="text"
                     value={inputString}
                     onChange={(e) => setInputString(e.target.value)}
                 />
-                <button onClick={insertionsort}>Sort</button>
+                <button onClick={settheArray}>Set The Array</button>
+                <button onClick={insertionSort}>Sort</button>
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent:"space-around"}}>
-                {steps.map((value, index) => (
+           <div className="array-container">
+                {array.map((value, idx) => (
                     <div
-                        key={index}
-                        style={{
-                            display: "inline-block",
-                            minwidth: "20px",
-                            width:"auto",
-                            margin: "0 5px",
-                            height: `${value * 5}px`,
-                            backgroundColor: currentI === index || currentJ === index ? "#F900FF" : "#06FF00",
-                            border: "1px solid black",
-                            color: "white",
-                            textAlign: "center",
-                        }}
+                        className="bar"
+                        key={idx}
+                        style={{ height: `${value * 5}px` }}
                     >
                         {value}
                     </div>

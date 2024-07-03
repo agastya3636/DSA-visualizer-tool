@@ -1,65 +1,60 @@
 import { useEffect, useState } from "react";
-
+import './a.css'
 function BubbleSort() {
     const [inputString, setInputString] = useState("");
-    const [sortedArray, setSortedArray] = useState([]);
-    const [steps, setSteps] = useState([]);
-    const [currentI, setCurrentI] = useState(null);
-    const [currentJ, setCurrentJ] = useState(null);
+    const [array, setArray] = useState([]);
 
-    const bubbleSort = () => {
-        const array = inputString.split(" ").map(Number);
-        setSortedArray(array);
-        setSteps([...array]);
+    const bubbleSort = async () => {
+        // setArray( inputString.split(" ").map(Number));
+        const bars = document.getElementsByClassName('bar');
+        const arrayCopy = [...array];
+        for (let i = 0; i < arrayCopy.length - 1; i++) {
+            for (let j = 0; j < arrayCopy.length - i - 1; j++) {
+                bars[j].style.backgroundColor = 'red';
+                bars[j + 1].style.backgroundColor = 'red';
+                if (arrayCopy[j] > arrayCopy[j + 1]) {
+                    await swap(arrayCopy, j, j + 1);
+                    setArray([...arrayCopy]);
+                }
+                bars[j].style.backgroundColor = '#3498db';
+                bars[j + 1].style.backgroundColor = '#3498db';
+            }
+        }
     };
 
-    useEffect(() => {
-        if (sortedArray.length > 0) {
-            const sortSteps = async () => {
-                for (let i = 0; i < sortedArray.length; i++) {
-                    for (let j = 0; j < sortedArray.length - i - 1; j++) {
-                        setCurrentI(j);
-                        setCurrentJ(j+1);
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        if (sortedArray[j] > sortedArray[j + 1]) {
-                            [sortedArray[j], sortedArray[j + 1]] = [sortedArray[j + 1], sortedArray[j]];
-                        }
-                        setSteps([...sortedArray]);
-                    }
-                }
-                setCurrentI(null);
-                setCurrentJ(null);
-            };
-            sortSteps();
-        }
-    }, [sortedArray]);
+    const swap = (array, i, j) => {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                [array[i], array[j]] = [array[j], array[i]];
+                resolve();
+            }, 1000);
+        });
+    };
+
+    const settheArray = async () => {
+        setArray( inputString.split(" ").map(Number));
+    }
 
     return (
-        <div>
+        <div className="Sortingcontainer">
             <h1>Bubble Sort</h1>
+            <p>Enter the elements of array seperated by space</p>
             <div>
                 <input
+                    className="arrayinput"
                     type="text"
                     value={inputString}
                     onChange={(e) => setInputString(e.target.value)}
                 />
+                <button onClick={settheArray}>Set The Array</button>
                 <button onClick={bubbleSort}>Sort</button>
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent:"space-around"}}>
-                {steps.map((value, index) => (
+           <div className="array-container">
+                {array.map((value, idx) => (
                     <div
-                        key={index}
-                        style={{
-                            display: "inline-block",
-                            minwidth: "20px",
-                            width:"auto",
-                            margin: "0 5px",
-                            height: `${value * 5}px`,
-                            backgroundColor: currentI === index || currentJ === index ? "#F900FF" : "#06FF00",
-                            border: "1px solid black",
-                            color: "white",
-                            textAlign: "center",
-                        }}
+                        className="bar"
+                        key={idx}
+                        style={{ height: `${value * 5}px` }}
                     >
                         {value}
                     </div>

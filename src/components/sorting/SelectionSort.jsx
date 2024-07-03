@@ -1,70 +1,73 @@
 import { useEffect, useState } from "react";
-
+import './a.css'
 function SelectionSort() {
     const [inputString, setInputString] = useState("");
-    const [sortedArray, setSortedArray] = useState([]);
-    const [steps, setSteps] = useState([]);
-    const [currentI, setCurrentI] = useState(null);
-    const [currentJ, setCurrentJ] = useState(null);
+    const [array, setArray] = useState([]);
 
-    const selectionSort = () => {
-        const array = inputString.split(" ").map(Number);
-        setSortedArray(array);
-        setSteps([...array]);
-    };
+    const selectionSort = async () => {
 
-    useEffect(() => {
-        if (sortedArray.length > 0) {
-            const sortSteps = async () => {
-                for (let i = 0; i < sortedArray.length - 1; i++) {
-                    let minIndex = i;
-                    setCurrentI(i);
-                    for (let j = i + 1; j < sortedArray.length; j++) {
-                        setCurrentJ(j);
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        if (sortedArray[j] < sortedArray[minIndex]) {
-                            minIndex = j;
-                        }
-                    }
-                    [sortedArray[i], sortedArray[minIndex]] = [sortedArray[minIndex], sortedArray[i]];
-                    setSteps([...sortedArray]);
-                    setCurrentI(i);
-                    setCurrentJ(null);
+        const bars = document.getElementsByClassName('bar');
+        const arrayCopy = [...array];
+        //selection sort
+        for (let i = 0; i < arrayCopy.length - 1; i++) {
+            let min_idx = i;
+            bars[i].style.backgroundColor = 'red';
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            for (let j = i + 1; j < arrayCopy.length; j++) {
+                bars[j].style.backgroundColor = 'red';
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (arrayCopy[j] < arrayCopy[min_idx]) {
+                    bars[min_idx].style.backgroundColor = '#3498db';
+                    min_idx = j;
+                    bars[min_idx].style.backgroundColor = 'red';
                     await new Promise(resolve => setTimeout(resolve, 1000));
                 }
-                setCurrentI(null);
-                setCurrentJ(null);
-            };
-            sortSteps();
+                else {
+                    bars[j].style.backgroundColor = '#3498db';
+                }
+            }
+            await swap(arrayCopy, i, min_idx);
+            setArray([...arrayCopy]);
+            bars[i].style.backgroundColor = '#3498db';
         }
-    }, [sortedArray]);
+    };
+
+    const swap = (array, i, j) => {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                [array[i], array[j]] = [array[j], array[i]];
+                resolve();
+            }, 1000);
+        });
+    };
+    useEffect(() => {
+        settheArray();
+    }, []);
+
+    const settheArray = async () => {
+        setArray( inputString.split(" ").map(Number));
+    }
 
     return (
-        <div>
+        <div className="Sortingcontainer">
             <h1>Selection Sort</h1>
+            <p>Enter the elements of array seperated by space</p>
             <div>
                 <input
+                    className="arrayinput"
                     type="text"
                     value={inputString}
                     onChange={(e) => setInputString(e.target.value)}
                 />
+                <button onClick={settheArray}>Set The Array</button>
                 <button onClick={selectionSort}>Sort</button>
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent:"space-around"}}>
-                {steps.map((value, index) => (
+           <div className="array-container">
+                {array.map((value, idx) => (
                     <div
-                        key={index}
-                        style={{
-                            display: "inline-block",
-                            minwidth: "20px",
-                            width:"auto",
-                            margin: "0 5px",
-                            height: `${value * 5}px`,
-                            backgroundColor: currentI === index || currentJ === index ? "#F900FF" : "#06FF00",
-                            border: "1px solid black",
-                            color: "white",
-                            textAlign: "center",
-                        }}
+                        className="bar"
+                        key={idx}
+                        style={{ height: `${value * 5}px` }}
                     >
                         {value}
                     </div>
